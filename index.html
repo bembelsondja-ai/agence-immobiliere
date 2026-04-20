@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Realty Group | Luxury Real Estate</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-cream: #FAFAF8;
+            --color-gold: #B8960C;
+            --color-gold-hover: #967A0A;
+            --color-black: #0D0D0D;
+            --color-text-mutated: #4A4A4A;
+            --color-white: #FFFFFF;
+            --color-gray-light: #EBEBEB;
+            --color-gray-border: #D7D7D7;
+            
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+            
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 6rem;
+            --space-xxl: 10rem;
+            
+            --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-cream);
+            color: var(--color-black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: var(--font-heading); font-weight: 500; line-height: 1.1; color: var(--color-black); }
+        a { text-decoration: none; color: inherit; transition: color var(--transition); }
+        img { max-width: 100%; height: auto; display: block; }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 var(--space-sm); }
+        .section-pad { padding: var(--space-xxl) 0; }
+        .text-gold { color: var(--color-gold); }
+        .text-center { text-align: center; }
+
+        /* Animation classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;
+            background-color: var(--color-gold); color: var(--color-white);
+            font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+            padding: 1.25rem 2.5rem; letter-spacing: 2px; text-transform: uppercase;
+            border: 1px solid var(--color-gold); cursor: pointer; transition: all var(--transition);
+        }
+        .btn:hover { background-color: var(--color-gold-hover); border-color: var(--color-gold-hover); color: var(--color-white); }
+
+        .btn-outline-white { background-color: transparent; border-color: var(--color-white); color: var(--color-white); }
+        .btn-outline-white:hover { background-color: var(--color-white); color: var(--color-black); }
+        
+        .btn-outline-dark { background-color: transparent; border-color: var(--color-black); color: var(--color-black); }
+        .btn-outline-dark:hover { background-color: var(--color-black); color: var(--color-white); }
+
+        /* Navigation */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            transition: background-color var(--transition), padding var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+        header.transparent { color: var(--color-white); }
+        header.transparent .logo { color: var(--color-white); }
+        header.scrolled {
+            background-color: rgba(250, 250, 248, 0.98); border-bottom-color: var(--color-gray-border);
+            color: var(--color-black); padding: 0.5rem 0;
+        }
+        header.scrolled .logo { color: var(--color-black); }
+
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; transition: padding var(--transition); }
+        .logo { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; z-index: 1001; display: flex; align-items: center; gap: 10px; }
+        .logo svg { width: 32px; height: 32px; color: var(--color-gold); }
+
+        .desktop-nav { display: none; gap: 3rem; align-items: center; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
+        .desktop-nav a:not(.btn):not(.private-portal):hover { color: var(--color-gold); }
+        
+        .private-portal {
+            color: var(--color-gold);
+            border-bottom: 1px solid var(--color-gold);
+            padding-bottom: 2px;
+            font-size: 0.75rem;
+        }
+
+        .mobile-btn { display: block; background: none; border: none; color: inherit; cursor: pointer; z-index: 1001; }
+        .mobile-menu {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--color-cream);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem;
+            font-family: var(--font-heading); font-size: 2.5rem; opacity: 0; pointer-events: none; transition: opacity var(--transition); z-index: 1000; color: var(--color-black);
+        }
+        .mobile-menu.active { opacity: 1; pointer-events: all; }
+        @media(min-width: 992px) { .mobile-btn { display: none; } .desktop-nav { display: flex; } }
+
+        .sec-title { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem; }
+        .sec-subtitle { font-family: var(--font-body); font-size: 1rem; color: var(--color-text-mutated); margin-bottom: var(--space-xl); letter-spacing: 1px; text-transform: uppercase; }
+
+        /* Hero Section */
+        .hero { height: 100vh; min-height: 800px; position: relative; display: flex; align-items: center; color: var(--color-white); }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: -2; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(13,13,13,0.7) 0%, rgba(13,13,13,0.2) 100%); z-index: -1; }
+        .hero-content { max-width: 800px; padding-top: 100px; }
+        .hero h1 { color: var(--color-white); font-size: clamp(3.5rem, 8vw, 5.5rem); margin-bottom: 1.5rem; text-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .hero p { font-size: 1.25rem; font-weight: 300; color: rgba(255,255,255,0.9); margin-bottom: 3rem; max-width: 600px; letter-spacing: 1px; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem; }
+
+        /* Hero Search Bar - Glassmorphism */
+        .hero-search {
+            display: flex; flex-wrap: wrap; gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            padding: 0.75rem; border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 900px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+        .hero-search div { flex: 1; min-width: 150px; }
+        .hero-search label { display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255, 255, 255, 0.6); margin-bottom: 0.25rem; margin-left: 0.5rem; }
+        .hero-search input, .hero-search select {
+            width: 100%; background: transparent; border: none; color: white;
+            font-family: var(--font-body); font-size: 0.9rem; padding: 0.5rem;
+            cursor: pointer;
+        }
+        .hero-search input::placeholder { color: rgba(255, 255, 255, 0.4); }
+        .hero-search select option { background: var(--color-black); color: white; }
+        
+        .hero-search .search-btn {
+            background-color: var(--color-gold); color: white; border: none;
+            padding: 0 2rem; text-transform: uppercase; letter-spacing: 1px;
+            font-weight: 600; cursor: pointer; transition: background var(--transition);
+        }
+        .hero-search .search-btn:hover { background-color: var(--color-gold-hover); }
+
+        /* Market Report Section */
+        .market-report { background-color: var(--color-white); border-top: 1px solid var(--color-gray-border); }
+        .mr-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center; }
+        @media(min-width: 992px) { .mr-grid { grid-template-columns: 1fr 1.2fr; } }
+        .mr-content h2 { font-size: 3.5rem; margin-bottom: 1.5rem; }
+        .mr-content p { font-size: 1.1rem; color: var(--color-text-mutated); margin-bottom: 2.5rem; }
+        .mr-form { display: flex; gap: 1rem; }
+        .mr-form input { flex: 1; padding: 1.2rem; border: 1px solid var(--color-gray-border); background: var(--color-cream); font-family: var(--font-body); }
+        .mr-img-wrap { position: relative; }
+        .mr-img { width: 100%; border: 1px solid var(--color-gray-border); box-shadow: var(--shadow-lg); }
+
+        /* Featured In Bar */
+        .featured-logos { background-color: var(--color-white); padding: 3rem 0; border-bottom: 1px solid var(--color-gray-border); }
+        .featured-logos-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem; opacity: 0.4; filter: grayscale(100%); }
+        .featured-logos-grid span { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-black); letter-spacing: 1px; font-style: italic; }
+        @media(min-width: 768px) { .featured-logos-grid { gap: 4rem; justify-content: space-between; } }
+
+        /* Stats Bar */
+        .stats { background-color: var(--color-black); color: var(--color-white); padding: var(--space-lg) 0; }
+        .stats-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+        .stat-item h3 { color: var(--color-gold); font-size: 3rem; margin-bottom: 0.5rem; font-family: var(--font-heading); }
+        .stat-item p { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.7); }
+        @media(min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } .stat-item { border-right: 1px solid rgba(255,255,255,0.1); } .stat-item:last-child { border-right: none; } }
+
+        /* Featured Listings */
+        .listings-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+        .property-card { background-color: var(--color-white); border: 1px solid var(--color-gray-border); transition: transform var(--transition), box-shadow var(--transition); }
+        .property-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.05); }
+        .property-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+        .property-content { padding: 2.5rem 2rem; }
+        .property-price { font-family: var(--font-heading); font-size: 2rem; color: var(--color-gold); margin-bottom: 0.5rem; }
+        .property-title { font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .property-details { display: flex; gap: 1.5rem; color: var(--color-text-mutated); font-size: 0.9rem; border-top: 1px solid var(--color-gray-light); padding-top: 1.5rem; flex-wrap: wrap; }
+        .prop-stat { display: flex; align-items: center; gap: 0.5rem; }
+        .prop-stat svg { color: var(--color-gold); }
+        @media(min-width: 1024px) { .listings-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        /* Lifestyle / Concierge Section */
+        .concierge {
+            position: relative;
+            padding: var(--space-xl) 0;
+            background-color: var(--color-black);
+            color: var(--color-white);
+            margin-top: var(--space-xxl);
+        }
+        .concierge-wrap {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .concierge-img {
+            width: 100%; aspect-ratio: 4/3; object-fit: cover;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .concierge-content h2 { color: var(--color-white); }
+        .concierge-content p { color: rgba(255,255,255,0.7); font-size: 1.1rem; margin-bottom: 2rem; }
+        .concierge-features { list-style: none; }
+        .concierge-features li { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; letter-spacing: 1px; text-transform: uppercase; font-size: 0.85rem;}
+        .concierge-features svg { color: var(--color-gold); }
+        @media(min-width: 992px) { .concierge-wrap { grid-template-columns: 1fr 1fr; } }
+
+        /* Why Choose Us */
+        .why-us { background-color: var(--color-white); }
+        .why-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+        .why-card { text-align: center; padding: 2rem; }
+        .why-icon { width: 60px; height: 60px; color: var(--color-gold); margin: 0 auto 2rem auto; }
+        .why-card h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .why-card p { color: var(--color-text-mutated); font-size: 1rem; }
+        @media(min-width: 768px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        /* Meet The Team */
+        .team-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+        .team-card { text-align: center; }
+        .team-img { width: 250px; height: 250px; border-radius: 50%; object-fit: cover; margin: 0 auto 2rem auto; border: 1px solid var(--color-gray-border); padding: 8px; transition: border-color var(--transition); }
+        .team-card:hover .team-img { border-color: var(--color-gold); }
+        .team-card h3 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .team-role { color: var(--color-gold); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 1rem; }
+        .team-stat { color: var(--color-text-mutated); font-size: 0.95rem; font-style: italic; }
+        @media(min-width: 992px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        /* Testimonials */
+        .testimonials-bg { background-color: var(--color-black); color: var(--color-white); padding-bottom: 5rem; }
+        .testimonials-bg .sec-title, .testimonials-bg h3 { color: var(--color-white); }
+        .testimonials-bg .sec-subtitle { color: rgba(255,255,255,0.6); }
+        .t-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; margin-bottom: 5rem; }
+        .t-card { background-color: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 3rem; }
+        .stars { color: var(--color-gold); margin-bottom: 1.5rem; display: flex; gap: 4px; }
+        .t-text { font-size: 1.1rem; font-style: italic; color: rgba(255,255,255,0.8); margin-bottom: 2rem; line-height: 1.8; }
+        .t-client { display: flex; align-items: center; gap: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; }
+        .t-client img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+        .t-client h4 { font-size: 1.2rem; margin-bottom: 0.2rem; }
+        .t-client p { color: var(--color-gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        @media(min-width: 992px) { .t-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        /* Google Badge Box */
+        .google-badge { background-color: var(--color-white); color: var(--color-black); padding: 3rem; text-align: center; max-width: 600px; margin: 0 auto; border: 1px solid var(--color-gray-border); }
+        .google-badge h3 { color: var(--color-black); margin-bottom: 1rem; font-size: 1.6rem; font-family: var(--font-body); font-weight: 500;}
+        .google-badge .stars { justify-content: center; margin-bottom: 0.5rem; }
+
+        /* Neighborhood Grid */
+        .neighborhoods { background-color: var(--color-cream); padding-bottom: 4rem;}
+        .n-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        .n-card { position: relative; height: 300px; overflow: hidden; }
+        .n-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; filter: brightness(0.8); }
+        .n-card:hover .n-img { transform: scale(1.05); filter: brightness(1); }
+        .n-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 2rem 1.5rem; }
+        .n-overlay h3 { color: var(--color-white); font-size: 1.8rem; margin: 0; }
+        @media(min-width: 768px) { .n-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(min-width: 1024px) { .n-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        /* Contact & FAQ */
+        .contact-area { background-color: var(--color-white); padding-top: 5rem; }
+        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+        @media(min-width: 1024px) { .contact-grid { grid-template-columns: 1fr 1fr; align-items: start; gap: 6rem; } }
+
+        .form-wrap h3, .faq-wrap h3 { font-size: 2.5rem; margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-mutated); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 1.2rem; background-color: var(--color-cream); border: 1px solid var(--color-gray-border); color: var(--color-black); font-family: var(--font-body); font-size: 1rem; transition: border-color var(--transition); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--color-gold); }
+        
+        .faq-item { border-bottom: 1px solid var(--color-gray-border); }
+        .faq-item:first-of-type { border-top: 1px solid var(--color-gray-border); }
+        .faq-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; background: none; border: none; color: var(--color-black); font-family: var(--font-heading); font-size: 1.5rem; font-weight: 500; cursor: pointer; text-align: left; }
+        .faq-btn svg { color: var(--color-gold); transition: transform var(--transition); }
+        .faq-item.active .faq-btn svg { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .faq-answer p { padding-bottom: 2rem; color: var(--color-text-mutated); }
+
+        /* Ensure sections don't hide under header when jumping to anchors */
+        section[id] {
+            scroll-margin-top: 100px;
+        }
+
+        /* Social Footer */
+        footer { background-color: var(--color-black); color: var(--color-white); padding: 5rem 0 3rem 0; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .footer-brand .logo svg { color: var(--color-gold); }
+        .footer-brand p { color: rgba(255,255,255,0.5); margin-top: 1rem; max-width: 300px; }
+        .social-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .social-item { display: flex; align-items: center; gap: 1rem; color: var(--color-white); }
+        .social-item .icon-box { width: 50px; height: 50px; background-color: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--color-gold); border-radius: 50%; }
+        .social-item div span { display: block; font-family: var(--font-heading); font-size: 1.5rem; line-height: 1.2; }
+        .social-item div small { color: rgba(255,255,255,0.5); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        @media(min-width: 768px) { .footer-grid { grid-template-columns: 1fr 2fr; } .social-stats-grid { grid-template-columns: repeat(4, 1fr); } }
+        .footer-bottom { text-align: center; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.3); font-size: 0.85rem; }
+
+    </style>
+</head>
+<body>
+
+    <header id="header" class="transparent">
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21v-8l9-7 9 7v8"></path><path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"></path></svg>
+                Horizon
+            </a>
+            
+            <nav class="desktop-nav">
+                <a href="#properties">Properties</a>
+                <a href="#agency">The Agency</a>
+                <a href="#team">Our Team</a>
+                <a href="#areas">Areas</a>
+                <a href="#contact">Contact</a>
+                <a href="#" class="private-portal" onclick="alert('Client Portal Login Dialog')">Private Portal</a>
+            </nav>
+
+            <button class="mobile-btn" id="mobile-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+
+        <nav class="mobile-menu" id="mobile-menu">
+            <a href="#properties" class="mobile-link">Properties</a>
+            <a href="#agency" class="mobile-link">The Agency</a>
+            <a href="#team" class="mobile-link">Our Team</a>
+            <a href="#areas" class="mobile-link">Areas We Cover</a>
+            <a href="#contact" class="mobile-link text-gold">Contact</a>
+            <a href="#" class="private-portal">Private Portal</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero reveal">
+            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2000&auto=format&fit=crop" alt="Miami Luxury Estate" class="hero-bg">
+            <div class="hero-overlay"></div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Find Your Dream<br>Home in Miami</h1>
+                    <p>Luxury real estate specialists since 2003.</p>
+                    <div class="hero-actions">
+                        <a href="#properties" class="btn">View Properties</a>
+                        <button class="btn btn-outline-white" onclick="alert('Video playing!')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Watch Our Story (90s)
+                        </button>
+                    </div>
+
+                    <div class="hero-search reveal delay-2">
+                        <div>
+                            <label>Location</label>
+                            <input type="text" placeholder="e.g. Miami Beach">
+                        </div>
+                        <div style="border-left: 1px solid rgba(255,255,255,0.2);">
+                            <label>Property Type</label>
+                            <select>
+                                <option>Villa</option>
+                                <option>Penthouse</option>
+                                <option>Modern Estate</option>
+                            </select>
+                        </div>
+                        <div style="border-left: 1px solid rgba(255,255,255,0.2);">
+                            <label>Budget</label>
+                            <select>
+                                <option>$1M - $3M</option>
+                                <option>$3M - $7M</option>
+                                <option>$7M+</option>
+                            </select>
+                        </div>
+                        <button class="search-btn">Search</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Featured In Bar -->
+        <section class="featured-logos reveal">
+            <div class="container featured-logos-grid">
+                <span>Forbes</span>
+                <span>The Wall Street Journal</span>
+                <span>Miami Herald</span>
+                <span>Architectural Digest</span>
+            </div>
+        </section>
+
+        <!-- 3. Stats Bar -->
+        <section class="stats reveal">
+            <div class="container stats-grid">
+                <div class="stat-item reveal delay-1">
+                    <h3>$2.4B+</h3>
+                    <p>Sales Volume</p>
+                </div>
+                <div class="stat-item reveal delay-2">
+                    <h3>500+</h3>
+                    <p>Homes Sold</p>
+                </div>
+                <div class="stat-item reveal delay-3">
+                    <h3>20</h3>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat-item reveal delay-4">
+                    <h3>98%</h3>
+                    <p>Client Satisfaction</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Featured Listings -->
+        <section id="properties" class="section-pad">
+            <div class="container">
+                <div class="text-center reveal">
+                    <h2 class="sec-title">Featured <span class="text-gold">Listings</span></h2>
+                    <p class="sec-subtitle">Exclusive properties across South Florida</p>
+                </div>
+                
+                <div class="listings-grid">
+                    <a href="#contact" class="property-card reveal delay-1">
+                        <img class="property-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop" alt="Waterfront Villa">
+                        <div class="property-content">
+                            <div class="property-price">$4,850,000</div>
+                            <h3 class="property-title">Waterfront Villa, Coral Gables</h3>
+                            <div class="property-details">
+                                <div class="prop-stat">5 Beds</div>
+                                <div class="prop-stat">6 Baths</div>
+                                <div class="prop-stat">6,200 sqft</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="#contact" class="property-card reveal delay-2">
+                        <img class="property-img" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800&auto=format&fit=crop" alt="Penthouse Suite">
+                        <div class="property-content">
+                            <div class="property-price">$2,100,000</div>
+                            <h3 class="property-title">Penthouse Suite, Brickell</h3>
+                            <div class="property-details">
+                                <div class="prop-stat">3 Beds</div>
+                                <div class="prop-stat">3 Baths</div>
+                                <div class="prop-stat">3,400 sqft</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#contact" class="property-card reveal delay-3">
+                        <img class="property-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Modern Estate">
+                        <div class="property-content">
+                            <div class="property-price">$3,275,000</div>
+                            <h3 class="property-title">Modern Estate, Coconut Grove</h3>
+                            <div class="property-details">
+                                <div class="prop-stat">4 Beds</div>
+                                <div class="prop-stat">5 Baths</div>
+                                <div class="prop-stat">4,800 sqft</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Concierge & Lifestyle Section -->
+        <section class="concierge reveal">
+            <div class="container concierge-wrap">
+                <img src="https://images.unsplash.com/photo-1569929233287-f0565228c4d4?q=80&w=800&auto=format&fit=crop" alt="Luxury Yacht Lifestyle" class="concierge-img reveal delay-1">
+                <div class="concierge-content reveal delay-2">
+                    <h2 class="sec-title">Beyond <span class="text-gold">Real Estate</span></h2>
+                    <p>Horizon offers an exclusive concierge service dedicated to orchestrating every facet of your transition to South Florida with absolute discretion.</p>
+                    <ul class="concierge-features">
+                        <li>Private Aviation & Yacht Charters</li>
+                        <li>Bespoke Legal & Tax Structuring</li>
+                        <li>Exclusive Staff Placement (Chefs, Security)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section id="agency" class="section-pad why-us reveal">
+            <div class="container">
+                <div class="text-center reveal">
+                    <h2 class="sec-title">The Horizon <span class="text-gold">Advantage</span></h2>
+                    <p class="sec-subtitle">Elevating the standard of luxury real estate</p>
+                </div>
+                
+                <div class="why-grid">
+                    <div class="why-card reveal delay-1">
+                        <h3>Exclusive Network</h3>
+                        <p>Gain private access to our prestigious portfolio of off-market luxury properties before they ever reach the public listings.</p>
+                    </div>
+                    
+                    <div class="why-card reveal delay-2">
+                        <h3>Expert Negotiation</h3>
+                        <p>Our senior brokers consistently achieve an average of 4.2% above asking price for our highly valued sellers.</p>
+                    </div>
+
+                    <div class="why-card reveal delay-3">
+                        <h3>White Glove Service</h3>
+                        <p>Enjoy a seamless experience with a dedicated agent handling every intricate detail from your initial search through closing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet The Team -->
+        <section id="team" class="section-pad reveal">
+            <div class="container">
+                <div class="text-center reveal">
+                    <h2 class="sec-title">Meet Our <span class="text-gold">Leaders</span></h2>
+                    <p class="sec-subtitle">The architects of Miami's highest profile deals</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-card reveal delay-1">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop" alt="Victoria Harmon" class="team-img">
+                        <h3>Victoria Harmon</h3>
+                        <div class="team-role">Founder & Principal Broker</div>
+                        <div class="team-stat">$1.2B in career sales</div>
+                    </div>
+
+                    <div class="team-card reveal delay-2">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop" alt="Marcus Webb" class="team-img">
+                        <h3>Marcus Webb</h3>
+                        <div class="team-role">Senior Luxury Specialist</div>
+                        <div class="team-stat">180+ transactions closed</div>
+                    </div>
+
+                    <div class="team-card reveal delay-3">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop" alt="Sofia Reyes" class="team-img">
+                        <h3>Sofia Reyes</h3>
+                        <div class="team-role">International Buyer Specialist</div>
+                        <div class="team-stat">Fluent in 3 languages</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Areas -->
+        <section id="areas" class="section-pad neighborhoods reveal">
+            <div class="container">
+                <div class="text-center reveal">
+                    <h2 class="sec-title">Prestigious <span class="text-gold">Neighborhoods</span></h2>
+                    <p class="sec-subtitle">Where luxury meets lifestyle</p>
+                </div>
+                <div class="n-grid">
+                    <div class="n-card reveal delay-1">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop" alt="Miami Beach" class="n-img">
+                        <div class="n-overlay"><h3>Miami Beach</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">The epicenter of South Florida luxury</p></div>
+                    </div>
+                    <div class="n-card">
+                        <img src="https://images.unsplash.com/photo-1517646331032-9e8563c520a1?auto=format&fit=crop&w=800&q=80" alt="Brickell" class="n-img">
+                        <div class="n-overlay"><h3>Brickell</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">The financial heart with a view</p></div>
+                    </div>
+                    <div class="n-card reveal delay-3">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop" alt="Coral Gables" class="n-img">
+                        <div class="n-overlay"><h3>Coral Gables</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">Historic charm and lush landscapes</p></div>
+                    </div>
+                    <div class="n-card">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Key Biscayne" class="n-img">
+                        <div class="n-overlay"><h3>Key Biscayne</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">Private island paradise</p></div>
+                    </div>
+                    <div class="n-card">
+                        <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80" alt="Coconut Grove" class="n-img">
+                        <div class="n-overlay"><h3>Coconut Grove</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">Bohemian elegance and bay views</p></div>
+                    </div>
+                    <div class="n-card reveal delay-3">
+                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1200&auto=format&fit=crop" alt="Pinecrest" class="n-img">
+                        <div class="n-overlay"><h3>Pinecrest</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">Exclusive family estates</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="reviews" class="section-pad testimonials-bg reveal">
+            <div class="container">
+                <div class="text-center reveal">
+                    <h2 class="sec-title">Client <span class="text-gold">Endorsements</span></h2>
+                </div>
+                
+                <div class="t-grid">
+                    <div class="t-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="t-text">"Victoria managed the sale of our property with complete discretion and expertise."</p>
+                        <div class="t-client">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=120&auto=format&fit=crop" alt="Jonathan Carter">
+                            <div><h4>Jonathan Carter</h4><p>Property Seller</p></div>
+                        </div>
+                    </div>
+
+                    <div class="t-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="t-text">"Horizon Property's attention to detail and market knowledge is unparalleled."</p>
+                        <div class="t-client">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=120&auto=format&fit=crop" alt="Sarah von Bismarck">
+                            <div><h4>Sarah von Bismarck</h4><p>International Investor</p></div>
+                        </div>
+                    </div>
+
+                    <div class="t-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="t-text">"Their concierge service handled everything from my yacht dockage to school placements."</p>
+                        <div class="t-client">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=120&auto=format&fit=crop" alt="Michael Chen">
+                            <div><h4>Michael Chen</h4><p>CEO, TechVentures</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="google-badge reveal">
+                    <div class="stars">★★★★★</div>
+                    <h3>4.9 — Based on 312 Google Reviews</h3>
+                    <p>Consistent luxury service, documented publicly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Report Section (Lead Magnet) -->
+        <section class="section-pad market-report">
+            <div class="container mr-grid">
+                <div class="mr-content reveal">
+                    <span class="text-gold" style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem; display: block;">Insider Insight</span>
+                    <h2>2026 Miami Luxury<br>Real Estate Report</h2>
+                    <p>Get exclusive access to off-market trends, upcoming developments, and investment analysis from South Florida's leading experts. Straight to your inbox.</p>
+                    <form class="mr-form reveal delay-1" onsubmit="event.preventDefault(); alert('Report successfully requested!');">
+                        <input type="email" placeholder="Your professional email" required>
+                        <button type="submit" class="btn">Get the Report</button>
+                    </form>
+                </div>
+                <div class="mr-img-wrap reveal delay-2">
+                    <img src="https://images.unsplash.com/photo-1543269664-76bc3997d9ea?q=80&w=1200&auto=format&fit=crop" alt="Market Analysis" class="mr-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-area reveal">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="form-wrap reveal delay-1">
+                        <h3>Private Consultation</h3>
+                        <form onsubmit="event.preventDefault(); alert('Inquiry Sent Successfully!');">
+                            <div class="form-group"><label>Full Name</label><input type="text" required></div>
+                            <div class="form-group"><label>Email Address</label><input type="email" required></div>
+                            <div class="form-group">
+                                <label>Budget Range</label>
+                                <select required>
+                                    <option>Under $1M</option><option>$1M - $3M</option><option>$3M - $5M</option><option>$5M+</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn" style="width:100%; border:none;">Request a Consultation</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="#" class="logo">Horizon</a><p>Curating Miami's most exclusive architectural assets.</p></div>
+            </div>
+            <div class="footer-bottom">&copy; 2026 Horizon Realty Group. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+                header.classList.toggle('transparent', window.scrollY <= 50);
+            });
+
+            // Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobile-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                // Change icon if needed, for now just toggle visibility
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                });
+            });
+
+            // FAQ Toggle
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const btn = item.querySelector('.faq-btn');
+                btn.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    faqItems.forEach(i => {
+                        i.classList.remove('active');
+                        i.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+                    if (!isActive) {
+                        item.classList.add('active');
+                        item.querySelector('.faq-answer').style.maxHeight = item.querySelector('.faq-answer').scrollHeight + "px";
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
