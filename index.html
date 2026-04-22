@@ -305,6 +305,55 @@
         @media(min-width: 768px) { .footer-grid { grid-template-columns: 1fr 2fr; } .social-stats-grid { grid-template-columns: repeat(4, 1fr); } }
         .footer-bottom { text-align: center; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.3); font-size: 0.85rem; }
 
+        /* Premium Upgrades CSS */
+        .property-card { position: relative; overflow: hidden; display: flex; flex-direction: column;}
+        .prop-badge { position: absolute; top: 1rem; left: 1rem; background: var(--color-black); color: var(--color-white); padding: 0.3rem 0.8rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; z-index: 10; font-weight: 500; }
+        .prop-badge.reduced { background: var(--color-gold); }
+        .prop-heart { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.8); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; z-index: 10; color: var(--color-text-mutated); cursor: pointer; transition: all var(--transition); }
+        .prop-heart:hover { color: var(--color-gold); background: var(--color-white); }
+        .prop-heart svg { width: 18px; height: 18px; }
+        .prop-hover-btn { position: absolute; bottom: 0; left: 0; width: 100%; background: var(--color-gold); color: var(--color-white); text-align: center; padding: 1rem; font-family: var(--font-body); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; transform: translateY(100%); transition: transform var(--transition); z-index: 10; font-weight: 500; border: none; cursor: pointer;}
+        .property-card:hover .prop-hover-btn { transform: translateY(0); }
+        .property-img { transition: filter var(--transition), transform 0.8s ease; }
+        .property-card:hover .property-img { filter: brightness(0.9); }
+        .no-results { display: none; grid-column: 1 / -1; text-align: center; padding: 4rem; background: var(--color-white); border: 1px solid var(--color-gray-border); font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-text-mutated); }
+        
+        /* Calculator */
+        .calc-section { background-color: var(--color-cream); padding: var(--space-xl) 0; }
+        .calc-wrap { background: var(--color-white); border: 1px solid var(--color-gray-border); padding: 3rem; display: grid; grid-template-columns: 1fr; gap: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        @media(min-width: 992px) { .calc-wrap { grid-template-columns: 1fr 1fr; } }
+        .calc-controls .calc-group { margin-bottom: 2rem; }
+        .calc-group label { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-mutated); font-weight: 500; }
+        .calc-group .val { font-family: var(--font-heading); font-size: 1.2rem; color: var(--color-gold); font-weight: 600; }
+        .calc-group input[type="range"] { width: 100%; appearance: none; height: 4px; background: var(--color-gray-border); border-radius: 2px; outline: none; }
+        .calc-group input[type="range"]::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--color-gold); cursor: pointer; transition: transform 0.1s; }
+        .calc-group input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+        .calc-toggle { display: flex; border: 1px solid var(--color-gray-border); border-radius: 4px; overflow: hidden; margin-top: 0.5rem; }
+        .calc-toggle button { flex: 1; padding: 1rem; border: none; background: transparent; cursor: pointer; font-family: var(--font-body); font-weight: 500; transition: background var(--transition); }
+        .calc-toggle button.active { background: var(--color-gold); color: var(--color-white); }
+        .calc-results { background: var(--color-black); color: var(--color-white); padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
+        .res-main { margin-bottom: 3rem; }
+        .res-main label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.6); }
+        .res-main .monthly { font-family: var(--font-heading); font-size: 4rem; color: var(--color-gold); margin-top: 0.5rem; line-height: 1; }
+        .res-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media(min-width: 768px) { .res-grid { grid-template-columns: 1fr 1fr; } }
+        .res-item label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; }
+        .res-item .amount { font-family: var(--font-heading); font-size: 1.5rem; }
+
+        /* Small Google Badge */
+        .inline-g-badge { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .inline-g-badge .stars svg { width: 16px; height: 16px; fill: var(--color-gold); }
+        .inline-g-badge p { font-size: 0.9rem; margin: 0; color: var(--color-white); letter-spacing: 1px;}
+        .inline-g-badge a { color: var(--color-gold); text-decoration: underline; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-left: 0.5rem;}
+
+        /* Team LinkedIn */
+        .team-social { margin-top: 1rem; display: flex; justify-content: center; gap: 1rem; }
+        .team-social svg { width: 20px; height: 20px; color: var(--color-gold); transition: color var(--transition); }
+        .team-social a:hover svg { color: var(--color-black); }
+
+        /* Areas Update */
+        .n-overlay h3 { color: var(--color-gold); font-size: 1.8rem; margin: 0 0 0.5rem 0; }
+        .n-listings { color: var(--color-white); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; font-family: var(--font-body); }
     </style>
 </head>
 <body>
@@ -351,7 +400,7 @@
                     <p>Luxury real estate specialists since 2003.</p>
                     <div class="hero-actions">
                         <a href="#properties" class="btn">View Properties</a>
-                        <button class="btn btn-outline-white" onclick="alert('Video playing!')">
+                        <button class="btn btn-outline-white" onclick="openVideo()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             Watch Our Story (90s)
                         </button>
@@ -360,25 +409,27 @@
                     <div class="hero-search reveal delay-2">
                         <div>
                             <label>Location</label>
-                            <input type="text" placeholder="e.g. Miami Beach">
+                            <input type="text" id="search-location" placeholder="e.g. Miami Beach">
                         </div>
                         <div style="border-left: 1px solid rgba(255,255,255,0.2);">
                             <label>Property Type</label>
-                            <select>
-                                <option>Villa</option>
-                                <option>Penthouse</option>
-                                <option>Modern Estate</option>
+                            <select id="search-type">
+                                <option value="All">All Types</option>
+                                <option value="Villa">Villa</option>
+                                <option value="Penthouse">Penthouse</option>
+                                <option value="Modern Estate">Modern Estate</option>
                             </select>
                         </div>
                         <div style="border-left: 1px solid rgba(255,255,255,0.2);">
                             <label>Budget</label>
-                            <select>
-                                <option>$1M - $3M</option>
-                                <option>$3M - $7M</option>
-                                <option>$7M+</option>
+                            <select id="search-budget">
+                                <option value="All">Any Budget</option>
+                                <option value="$1M-$3M">$1M - $3M</option>
+                                <option value="$3M-$7M">$3M - $7M</option>
+                                <option value="$7M+">$7M+</option>
                             </select>
                         </div>
-                        <button class="search-btn">Search</button>
+                        <button class="search-btn" id="search-btn">Search</button>
                     </div>
                 </div>
             </div>
@@ -414,6 +465,20 @@
                     <p>Client Satisfaction</p>
                 </div>
             </div>
+            
+            <div class="container">
+                <div class="inline-g-badge reveal delay-4">
+                    <div class="stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p>4.9 — 312 Google Reviews</p>
+                    <a href="#reviews">Read Our Reviews</a>
+                </div>
+            </div>
         </section>
 
         <!-- 4. Featured Listings -->
@@ -424,8 +489,10 @@
                     <p class="sec-subtitle">Exclusive properties across South Florida</p>
                 </div>
                 
-                <div class="listings-grid">
-                    <a href="#contact" class="property-card reveal delay-1">
+                <div class="listings-grid" id="listings-grid">
+                    <div class="property-card reveal delay-1" data-location="Coral Gables" data-type="Villa" data-budget="$3M-$7M">
+                        <span class="prop-badge">New Listing</span>
+                        <div class="prop-heart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
                         <img class="property-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop" alt="Waterfront Villa">
                         <div class="property-content">
                             <div class="property-price">$4,850,000</div>
@@ -436,9 +503,11 @@
                                 <div class="prop-stat">6,200 sqft</div>
                             </div>
                         </div>
-                    </a>
+                        <button class="prop-hover-btn" onclick="alert('Viewing scheduled!')">Schedule a Viewing</button>
+                    </div>
                     
-                    <a href="#contact" class="property-card reveal delay-2">
+                    <div class="property-card reveal delay-2" data-location="Brickell" data-type="Penthouse" data-budget="$1M-$3M">
+                        <div class="prop-heart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
                         <img class="property-img" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800&auto=format&fit=crop" alt="Penthouse Suite">
                         <div class="property-content">
                             <div class="property-price">$2,100,000</div>
@@ -449,9 +518,12 @@
                                 <div class="prop-stat">3,400 sqft</div>
                             </div>
                         </div>
-                    </a>
+                        <button class="prop-hover-btn" onclick="alert('Viewing scheduled!')">Schedule a Viewing</button>
+                    </div>
 
-                    <a href="#contact" class="property-card reveal delay-3">
+                    <div class="property-card reveal delay-3" data-location="Coconut Grove" data-type="Modern Estate" data-budget="$3M-$7M">
+                        <span class="prop-badge reduced">Price Reduced</span>
+                        <div class="prop-heart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
                         <img class="property-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Modern Estate">
                         <div class="property-content">
                             <div class="property-price">$3,275,000</div>
@@ -462,7 +534,58 @@
                                 <div class="prop-stat">4,800 sqft</div>
                             </div>
                         </div>
-                    </a>
+                        <button class="prop-hover-btn" onclick="alert('Viewing scheduled!')">Schedule a Viewing</button>
+                    </div>
+
+                    <div class="property-card reveal delay-1" data-location="Star Island" data-type="Villa" data-budget="$7M+">
+                        <span class="prop-badge">New Listing</span>
+                        <div class="prop-heart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+                        <img class="property-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop" alt="Star Island Estate">
+                        <div class="property-content">
+                            <div class="property-price">$7,200,000</div>
+                            <h3 class="property-title">Star Island Estate</h3>
+                            <div class="property-details">
+                                <div class="prop-stat">3 Beds</div>
+                                <div class="prop-stat">4 Baths</div>
+                                <div class="prop-stat">8,100 sqft</div>
+                            </div>
+                        </div>
+                        <button class="prop-hover-btn" onclick="alert('Viewing scheduled!')">Schedule a Viewing</button>
+                    </div>
+
+                    <div class="property-card reveal delay-2" data-location="Miami Beach" data-type="Penthouse" data-budget="$1M-$3M">
+                        <div class="prop-heart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+                        <img class="property-img" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop" alt="Miami Beach Condo">
+                        <div class="property-content">
+                            <div class="property-price">$1,800,000</div>
+                            <h3 class="property-title">Miami Beach Condo</h3>
+                            <div class="property-details">
+                                <div class="prop-stat">2 Beds</div>
+                                <div class="prop-stat">2 Baths</div>
+                                <div class="prop-stat">2,100 sqft</div>
+                            </div>
+                        </div>
+                        <button class="prop-hover-btn" onclick="alert('Viewing scheduled!')">Schedule a Viewing</button>
+                    </div>
+
+                    <div class="property-card reveal delay-3" data-location="Key Biscayne" data-type="Villa" data-budget="$3M-$7M">
+                        <div class="prop-heart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+                        <img class="property-img" src="https://images.unsplash.com/photo-1510627489930-0c1b0bfb6785?q=80&w=800&auto=format&fit=crop" alt="Key Biscayne Villa">
+                        <div class="property-content">
+                            <div class="property-price">$5,400,000</div>
+                            <h3 class="property-title">Key Biscayne Villa</h3>
+                            <div class="property-details">
+                                <div class="prop-stat">4 Beds</div>
+                                <div class="prop-stat">5 Baths</div>
+                                <div class="prop-stat">5,500 sqft</div>
+                            </div>
+                        </div>
+                        <button class="prop-hover-btn" onclick="alert('Viewing scheduled!')">Schedule a Viewing</button>
+                    </div>
+
+                    <div class="no-results" id="no-results">
+                        No properties found matching your criteria.
+                    </div>
                 </div>
             </div>
         </section>
@@ -524,6 +647,7 @@
                         <h3>Victoria Harmon</h3>
                         <div class="team-role">Founder & Principal Broker</div>
                         <div class="team-stat">$1.2B in career sales</div>
+                        <div class="team-social"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a></div>
                     </div>
 
                     <div class="team-card reveal delay-2">
@@ -531,6 +655,7 @@
                         <h3>Marcus Webb</h3>
                         <div class="team-role">Senior Luxury Specialist</div>
                         <div class="team-stat">180+ transactions closed</div>
+                        <div class="team-social"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a></div>
                     </div>
 
                     <div class="team-card reveal delay-3">
@@ -538,6 +663,7 @@
                         <h3>Sofia Reyes</h3>
                         <div class="team-role">International Buyer Specialist</div>
                         <div class="team-stat">Fluent in 3 languages</div>
+                        <div class="team-social"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a></div>
                     </div>
                 </div>
             </div>
@@ -553,27 +679,27 @@
                 <div class="n-grid">
                     <div class="n-card reveal delay-1">
                         <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop" alt="Miami Beach" class="n-img">
-                        <div class="n-overlay"><h3>Miami Beach</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">The epicenter of South Florida luxury</p></div>
+                        <div class="n-overlay"><h3>Miami Beach</h3><div class="n-listings">42 Active Listings</div></div>
                     </div>
                     <div class="n-card">
                         <img src="https://images.unsplash.com/photo-1517646331032-9e8563c520a1?auto=format&fit=crop&w=800&q=80" alt="Brickell" class="n-img">
-                        <div class="n-overlay"><h3>Brickell</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">The financial heart with a view</p></div>
+                        <div class="n-overlay"><h3>Brickell</h3><div class="n-listings">86 Active Listings</div></div>
                     </div>
                     <div class="n-card reveal delay-3">
                         <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop" alt="Coral Gables" class="n-img">
-                        <div class="n-overlay"><h3>Coral Gables</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">Historic charm and lush landscapes</p></div>
+                        <div class="n-overlay"><h3>Coral Gables</h3><div class="n-listings">15 Active Listings</div></div>
                     </div>
                     <div class="n-card">
                         <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Key Biscayne" class="n-img">
-                        <div class="n-overlay"><h3>Key Biscayne</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">Private island paradise</p></div>
+                        <div class="n-overlay"><h3>Key Biscayne</h3><div class="n-listings">8 Active Listings</div></div>
                     </div>
                     <div class="n-card">
                         <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80" alt="Coconut Grove" class="n-img">
-                        <div class="n-overlay"><h3>Coconut Grove</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">Bohemian elegance and bay views</p></div>
+                        <div class="n-overlay"><h3>Coconut Grove</h3><div class="n-listings">24 Active Listings</div></div>
                     </div>
                     <div class="n-card reveal delay-3">
                         <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1200&auto=format&fit=crop" alt="Pinecrest" class="n-img">
-                        <div class="n-overlay"><h3>Pinecrest</h3><p style="color:var(--color-white); font-size:0.8rem; opacity:0.8;">Exclusive family estates</p></div>
+                        <div class="n-overlay"><h3>Pinecrest</h3><div class="n-listings">11 Active Listings</div></div>
                     </div>
                 </div>
             </div>
@@ -615,11 +741,7 @@
                     </div>
                 </div>
 
-                <div class="google-badge reveal">
-                    <div class="stars">★★★★★</div>
-                    <h3>4.9 — Based on 312 Google Reviews</h3>
-                    <p>Consistent luxury service, documented publicly.</p>
-                </div>
+                <!-- Old google badge removed -->
             </div>
         </section>
 
@@ -637,6 +759,59 @@
                 </div>
                 <div class="mr-img-wrap reveal delay-2">
                     <img src="https://images.unsplash.com/photo-1543269664-76bc3997d9ea?q=80&w=1200&auto=format&fit=crop" alt="Market Analysis" class="mr-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- Mortgage Calculator -->
+        <section class="calc-section reveal">
+            <div class="container">
+                <div class="text-center reveal">
+                    <h2 class="sec-title">Calculate Your <span class="text-gold">Investment</span></h2>
+                    <p class="sec-subtitle">Estimate your monthly payments</p>
+                </div>
+                <div class="calc-wrap reveal delay-1">
+                    <div class="calc-controls">
+                        <div class="calc-group">
+                            <label>Property Price <span class="val" id="val-price">$2,500,000</span></label>
+                            <input type="range" id="slider-price" min="500000" max="10000000" step="50000" value="2500000">
+                        </div>
+                        <div class="calc-group">
+                            <label>Down Payment <span class="val" id="val-down">20%</span></label>
+                            <input type="range" id="slider-down" min="10" max="50" step="1" value="20">
+                        </div>
+                        <div class="calc-group">
+                            <label>Interest Rate <span class="val" id="val-rate">6.5%</span></label>
+                            <input type="range" id="slider-rate" min="3.0" max="9.0" step="0.1" value="6.5">
+                        </div>
+                        <div class="calc-group">
+                            <label>Loan Term</label>
+                            <div class="calc-toggle">
+                                <button type="button" id="term-15" onclick="setTerm(15)">15 Years</button>
+                                <button type="button" id="term-30" class="active" onclick="setTerm(30)">30 Years</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-results">
+                        <div class="res-main">
+                            <label>Estimated Monthly Payment</label>
+                            <div class="monthly" id="res-monthly">$12,641</div>
+                        </div>
+                        <div class="res-grid">
+                            <div class="res-item">
+                                <label>Total Loan Amount</label>
+                                <div class="amount" id="res-loan">$2,000,000</div>
+                            </div>
+                            <div class="res-item">
+                                <label>Down Payment Amount</label>
+                                <div class="amount" id="res-down-amt">$500,000</div>
+                            </div>
+                            <div class="res-item">
+                                <label>Total Interest Paid</label>
+                                <div class="amount" id="res-interest">$2,550,884</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -718,7 +893,120 @@
                     }
                 });
             });
+
+            // --- SEARCH LOGIC ---
+            const searchBtn = document.getElementById('search-btn');
+            const searchLoc = document.getElementById('search-location');
+            const searchType = document.getElementById('search-type');
+            const searchBudget = document.getElementById('search-budget');
+            const cards = document.querySelectorAll('.property-card');
+            const noResults = document.getElementById('no-results');
+
+            searchBtn.addEventListener('click', () => {
+                const locVal = searchLoc.value.toLowerCase();
+                const typeVal = searchType.value;
+                const budgetVal = searchBudget.value;
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const cLoc = card.getAttribute('data-location').toLowerCase();
+                    const cType = card.getAttribute('data-type');
+                    const cBudget = card.getAttribute('data-budget');
+
+                    let match = true;
+                    if (locVal && !cLoc.includes(locVal)) match = false;
+                    if (typeVal !== 'All' && cType !== typeVal) match = false;
+                    if (budgetVal !== 'All' && cBudget !== budgetVal) match = false;
+
+                    if (match) {
+                        card.style.display = 'flex';
+                        setTimeout(() => card.style.opacity = '1', 50);
+                        visibleCount++;
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.style.display = 'none', 400);
+                    }
+                });
+
+                setTimeout(() => {
+                    noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+                }, 400);
+                
+                // Scroll to results
+                document.getElementById('listings-grid').scrollIntoView({behavior: 'smooth', block: 'start'});
+            });
+
+            // --- MORTGAGE CALCULATOR LOGIC ---
+            const sPrice = document.getElementById('slider-price');
+            const sDown = document.getElementById('slider-down');
+            const sRate = document.getElementById('slider-rate');
+            const vPrice = document.getElementById('val-price');
+            const vDown = document.getElementById('val-down');
+            const vRate = document.getElementById('val-rate');
+            const rMonthly = document.getElementById('res-monthly');
+            const rLoan = document.getElementById('res-loan');
+            const rDownAmt = document.getElementById('res-down-amt');
+            const rInterest = document.getElementById('res-interest');
+            let termYears = 30;
+
+            window.setTerm = function(y) {
+                termYears = y;
+                document.getElementById('term-15').classList.toggle('active', y === 15);
+                document.getElementById('term-30').classList.toggle('active', y === 30);
+                calc();
+            };
+
+            const formatM = (num) => '$' + Math.round(num).toLocaleString('en-US');
+
+            function calc() {
+                const price = parseFloat(sPrice.value);
+                const downPct = parseFloat(sDown.value);
+                const rate = parseFloat(sRate.value);
+
+                vPrice.innerText = formatM(price);
+                vDown.innerText = downPct + '%';
+                vRate.innerText = rate.toFixed(1) + '%';
+
+                const downAmt = price * (downPct / 100);
+                const loanAmt = price - downAmt;
+                
+                const r = (rate / 100) / 12;
+                const n = termYears * 12;
+                let monthly = 0;
+                
+                if (r === 0) {
+                    monthly = loanAmt / n;
+                } else {
+                    monthly = loanAmt * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+                }
+
+                const totalPaid = monthly * n;
+                const totalInterest = totalPaid - loanAmt;
+
+                rMonthly.innerText = formatM(monthly);
+                rLoan.innerText = formatM(loanAmt);
+                rDownAmt.innerText = formatM(downAmt);
+                rInterest.innerText = formatM(totalInterest);
+            }
+
+            [sPrice, sDown, sRate].forEach(s => s.addEventListener('input', calc));
+            calc();
         });
+
+        function openVideo() {
+            document.getElementById('video-modal').style.display = 'flex';
+            document.getElementById('yt-frame').src = 'https://www.youtube.com/embed/ZLKKRtTGYQM?autoplay=1';
+        }
+        function closeVideo() {
+            document.getElementById('video-modal').style.display = 'none';
+            document.getElementById('yt-frame').src = '';
+        }
     </script>
+    <div id="video-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center;">
+        <div style="position:relative; width:90%; max-width:900px;">
+            <button onclick="closeVideo()" style="position:absolute; top:-40px; right:0; background:none; border:none; color:white; font-size:2rem; cursor:pointer;">✕</button>
+            <iframe id="yt-frame" width="100%" height="500" frameborder="0" allowfullscreen style="border-radius:8px;"></iframe>
+        </div>
+    </div>
 </body>
 </html>
